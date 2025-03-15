@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <style>
+        /* Add Vazir Font Faces */
+        @font-face {
+            font-family: 'VazirBold';
+            src: url('vazirb.ttf') format('truetype');
+            font-weight: bold;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'VazirRegular';
+            src: url('vazir.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a1a2f;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'VazirRegular', sans-serif; /* Default font */
+        }
+
+        .container {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(12, 25, 47, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.2);
+            animation: fadeIn 1s ease-in;
+        }
+
+        .title {
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #00ff88, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 180, 255, 0.3);
+            font-family: 'VazirBold', sans-serif; /* Bold font for title */
+        }
+
+        .description {
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            color: #8ca0d7;
+            font-size: 0.95em;
+            font-family: 'VazirRegular', sans-serif;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .trade-btn {
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #00b4ff 0%, #0066ff 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 100, 255, 0.3);
+            font-family: 'VazirRegular', sans-serif; /* Regular font for buttons */
+        }
+
+        .trade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 100, 255, 0.5);
+        }
+
+        .trade-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .trade-btn:hover::after {
+            left: 100%;
+        }
+
+        .animated-bg {
+            position: absolute;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 25%,
+                rgba(0, 180, 255, 0.1) 50%,
+                transparent 75%
+            );
+            animation: moveBg 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes moveBg {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="container">
+        <h1 class="title">منابع خبری مهم و ارزشمند</h1>
+        <p class="description">
+           در طی زمان منابع خبری معتبر و مورد تایید دیگری به این لیست اضافه خواهد شد
+        </p>
+        <div class="btn-container">
+            <button class="trade-btn" onclick="showAlert('https://tabdeal.org/academy/news/')">اخبار در صرافی تبدیل</button>
+            <button class="trade-btn" onclick="showAlert('https://nobitex.ir/mag/category/news/')">اخبار در صرافی نوبیتکس</button>
+            <button class="trade-btn" onclick="showAlert('https://bit24.cash/blog/category/news/')">اخبار در صرافی بیت ۲۴</button>
+        </div>
+    </div>
+
+    <script>
+        function showAlert(message) {
+            // Add slight animation to the alert
+            const alertBox = alert(message);
+            
+            // Add visual feedback for button click
+            event.currentTarget.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                event.currentTarget.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // Add slight parallax effect to animated background
+        document.addEventListener('mousemove', (e) => {
+            const bg = document.querySelector('.animated-bg');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            bg.style.transform = `translate(-${x * 10}%, -${y * 10}%)`;
+        });
+    </script>
+</body>
+</html>
